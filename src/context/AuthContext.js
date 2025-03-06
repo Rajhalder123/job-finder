@@ -12,12 +12,17 @@ export const AuthProvider = ({ children }) => {
         if (token) {
             try {
                 const decoded = jwtDecode(token);
-                setUser(decoded);
+                const currentTime = Date.now() / 1000; // Get current time in seconds
+
+                if (decoded.exp < currentTime) {
+                    console.warn("Token expired, logging out...");
+                    logout(); // Token expired, clear it
+                } else {
+                    setUser(decoded);
+                }
             } catch (error) {
                 console.error("Invalid token:", error);
-                localStorage.removeItem("token"); // Clear invalid token
-                setToken(null);
-                setUser(null);
+                logout();
             }
         }
     }, [token]);

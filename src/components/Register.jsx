@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
@@ -31,16 +35,26 @@ const Register = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Register</h2>
+        <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">
+          Register
+        </h2>
 
         {/* Success Message */}
-        {success && <p className="text-green-500 text-center mb-4">{success}</p>}
+        {success && (
+          <p className="text-green-500 text-center mb-4">{success}</p>
+        )}
 
         {/* Error Message */}
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Username Input */}
+          <label
+            htmlFor="username"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Name
+          </label>
           <input
             type="text"
             name="username"
@@ -52,6 +66,12 @@ const Register = () => {
           />
 
           {/* Email Input */}
+          <label
+            htmlFor="username"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -63,6 +83,12 @@ const Register = () => {
           />
 
           {/* Password Input */}
+          <label
+            htmlFor="username"
+            className="block text-sm font-medium text-gray-700"
+          >
+           Password
+          </label>
           <input
             type="password"
             name="password"
@@ -76,7 +102,12 @@ const Register = () => {
           {/* Register Button */}
           <button
             type="submit"
-            disabled={!formData.username || !formData.email || !formData.password || loading}
+            disabled={
+              !formData.username ||
+              !formData.email ||
+              !formData.password ||
+              loading
+            }
             className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
           >
             {loading ? "Registering..." : "Register"}
